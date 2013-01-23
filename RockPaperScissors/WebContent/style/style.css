@@ -1,0 +1,36 @@
+hr {
+	clear:both;
+	width:500px;
+}
+.main {
+	text-align:center;
+}
+.results {
+	margin:0 auto;
+	width:300px;
+}
+.results p {
+	float:left;
+}
+.results .result {
+	width:300px;
+	text-align:center;
+	clear:both;
+}
+.game-form {
+	clear:both;
+	margin:0 auto;
+	width:500px;
+}
+.weapon-choose { 
+	list-style-type: none;
+}
+.weapon-choose li {
+	float:left;	
+}
+.weapon-choose li img {
+	height:200px; 
+}
+.options {
+	clear:both; 
+}
