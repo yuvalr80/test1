@@ -28,9 +28,14 @@
 			<p><img src="images/rps.jpg"/></p>
 		<% 
 			}
-			else {
-				Weapon opponentWeapon = game.play();
-				Result res = game.check(chosenWeapon, opponentWeapon);
+			else {				
+				Result res = null;
+				Weapon opponentWeapon = null;
+				boolean winnerMode = (request.getParameter("winner") != null);
+				while ((winnerMode && !Result.WIN.equals(res)) || (!winnerMode && res == null)) {
+					opponentWeapon = game.play();				
+					res = game.check(chosenWeapon, opponentWeapon);
+				}
 		%>
 			<div class="results">
 				<p>
@@ -45,7 +50,8 @@
 				</p>
 				<br/><br/>
 				<p class="result">
-					<b><%= (res.equals(Result.WIN) ? "You win!" : res.equals(Result.LOSE) ? "Sorry, you lose.." : "It's a Tie.") %></b>
+					<b><%= (Result.WIN.equals(res) ? "You win!"  + (winnerMode ? " (amazing) " : "") 
+							: Result.LOSE.equals(res) ? "Sorry, you lose.." : "It's a Tie.") %></b>
 				</p>
 			</div>
 		<%
@@ -75,6 +81,8 @@
 					<br/><br/>
 					<input type="checkbox" name="player" value="computer" 
 						<%= (request.getParameter("player") != null ? "checked" : "") %>>Let Mr. Computer play for me
+					<input type="checkbox" name="winner" value="winner"
+						<%= (request.getParameter("winner") != null ? "checked" : "") %>>Eternal winner mode
 					<br/><br/>
 					<input type="submit" value="Play">&nbsp;&nbsp;&nbsp;<a href="index.jsp">New Game</a>
 				</div>
